@@ -1,0 +1,20 @@
+[
+  {
+    "id": "product-teardown-framework",
+    "title": "The Ultimate Product Teardown Framework",
+    "summary": "A structured approach to deconstructing any product to understand its core loop, UX, and monetization strategy. Includes a sample product discovery framework.",
+    "excerpt": "A structured approach to deconstructing any product to understand its core loop, UX, and monetization strategy. Includes a sample product discovery framework.",
+    "category": "Framework",
+    "date": "APR 2026",
+    "readTime": "5 min read"
+  },
+  {
+    "id": "pr-faq-amazon",
+    "title": "Writing an Amazon PR/FAQ",
+    "summary": "Learn how to work backwards from the customer using the famous Amazon Press Release / FAQ format.",
+    "excerpt": "Learn how to work backwards from the customer using the famous Amazon Press Release / FAQ format.",
+    "category": "Case Study",
+    "date": "MAY 2026",
+    "readTime": "8 min read"
+  }
+]

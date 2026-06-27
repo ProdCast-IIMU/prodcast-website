@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProdCast – Building Tomorrow's Product Leaders | IIM Udaipur</title>
+  <meta name="description" content="ProdCast is the official Product Management Club of IIM Udaipur. 9 flagship initiatives, 50+ members, one north star mission." />
+  <meta property="og:title" content="ProdCast – PM Innovation Universe, IIM Udaipur" />
+  <meta property="og:description" content="Where product builders are made. Enter the future headquarters of product innovators." />
+  <link rel="icon" type="image/png" href="assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body class="dark">
+
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ══════════════════════  NAV  ══════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="nav-brand">
+        <div class="nav-logo-wrap">
+          <img src="assets/logo.png" alt="ProdCast" class="nav-logo-img" />
+        </div>
+        <span class="nav-brand-text">ProdCast</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#scroll-story"  class="nav-link" data-nav="about">About</a></li>
+        <li><a href="#helix-section" class="nav-link" data-nav="initiatives">Initiatives</a></li>
+        <li><a href="#pm-roadmap"    class="nav-link" data-nav="pm-roadmap">PM Journey</a></li>
+        <li><a href="#events"        class="nav-link" data-nav="events">Events</a></li>
+        <li><a href="#team"          class="nav-link" data-nav="team">Team</a></li>
+        <li><a href="#projects"      class="nav-link" data-nav="projects">Year Plan</a></li>
+        <li><a href="frameworks.html" class="nav-link external-page-link">Frameworks ↗</a></li>
+      </ul>
+      <div class="nav-controls">
+        <button class="volume-btn" id="volumeBtn" aria-label="Toggle sound" title="Toggle audio">
+          <svg class="icon-volume-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <svg class="icon-volume-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4V5z"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+        </button>
+        <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle light/dark">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════  MOBILE NAV  ═══════════════════════ -->
+  <nav class="mob-nav" id="mobNav">
+    <a href="#home" class="mob-nav-item active" data-nav="home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Home</span>
+    </a>
+    <a href="#helix-section" class="mob-nav-item" data-nav="initiatives">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Initiatives</span>
+    </a>
+    <a href="#events" class="mob-nav-item" data-nav="events">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span>Events</span>
+    </a>
+    <a href="#team" class="mob-nav-item" data-nav="team">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span>Team</span>
+    </a>
+    <a href="frameworks.html" class="mob-nav-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span>Frameworks</span>
+    </a>
+  </nav>
+
+  <!-- ══════════════════════  HERO  ══════════════════════════ -->
+  <section class="hero" id="home">
+    <!-- HUD -->
+    <div class="hud-corner hud-corner-tl"></div>
+    <div class="hud-corner hud-corner-tr"></div>
+    <div class="hud-corner hud-corner-bl"></div>
+    <div class="hud-corner hud-corner-br"></div>
+    <div class="hud-telemetry-tag hud-tag-tl">SYS_OP: ACTIVE</div>
+    <div class="hud-telemetry-tag hud-tag-tr">24.59°N / 73.71°E</div>
+    <div class="hud-telemetry-tag hud-tag-bl">MEMBERS: 50+</div>
+    <div class="hud-telemetry-tag hud-tag-br">EST: 2024</div>
+
+    <div class="hero-bg-overlay"></div>
+
+    <!-- ── NORTH STAR LOGO ── -->
+    <div class="hero-star-wrap" id="heroStar">
+      <!-- Pulsing halos -->
+      <div class="star-halo star-halo-lg"></div>
+      <div class="star-halo star-halo-md"></div>
+      <div class="star-halo star-halo-sm"></div>
+
+      <!-- SVG Star -->
+      <svg class="north-star-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="starGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="35%"  stop-color="#06B6D4"/>
+            <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.85"/>
+          </radialGradient>
+          <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#ffffff"/>
+            <stop offset="100%" stop-color="#e0fbff"/>
+          </radialGradient>
+          <filter id="starGlow" x="-40%" y="-40%" width="180%" height="180%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="coreGlow" x="-80%" y="-80%" width="260%" height="260%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <!-- Outer dashed orbital ring -->
+        <circle cx="100" cy="100" r="91" fill="none"
+                stroke="rgba(6,182,212,0.22)" stroke-width="1"
+                stroke-dasharray="4 7" class="star-ring-anim"/>
+        <!-- Inner dotted ring -->
+        <circle cx="100" cy="100" r="75" fill="none"
+                stroke="rgba(139,92,246,0.18)" stroke-width="1"
+                stroke-dasharray="2 9"/>
+
+        <!-- Cardinal rays -->
+        <line x1="100" y1="3"   x2="100" y2="22"  stroke="rgba(6,182,212,0.65)"  stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="100" y1="178" x2="100" y2="197" stroke="rgba(6,182,212,0.65)"  stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="3"   y1="100" x2="22"  y2="100" stroke="rgba(139,92,246,0.65)" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="178" y1="100" x2="197" y2="100" stroke="rgba(139,92,246,0.65)" stroke-width="1.5" stroke-linecap="round"/>
+        <!-- Diagonal rays -->
+        <line x1="23" y1="23" x2="35" y2="35" stroke="rgba(6,182,212,0.3)"  stroke-width="1" stroke-linecap="round"/>
+        <line x1="165" y1="23" x2="177" y2="35" stroke="rgba(6,182,212,0.3)"  stroke-width="1" stroke-linecap="round"/>
+        <line x1="23" y1="177" x2="35" y2="165" stroke="rgba(6,182,212,0.3)"  stroke-width="1" stroke-linecap="round"/>
+        <line x1="165" y1="177" x2="177" y2="165" stroke="rgba(6,182,212,0.3)" stroke-width="1" stroke-linecap="round"/>
+
+        <!-- 4-pointed North Star polygon -->
+        <polygon
+          points="100,10 106,94 145,100 106,106 100,190 94,106 55,100 94,94"
+          fill="url(#starGrad)" filter="url(#starGlow)"/>
+
+        <!-- Bright center core -->
+        <circle cx="100" cy="100" r="15" fill="url(#coreGrad)" filter="url(#coreGlow)"/>
+        <circle cx="100" cy="100" r="7"  fill="white" opacity="0.98"/>
+
+        <!-- Satellite dots on outer ring -->
+        <circle cx="100" cy="9"  r="3.5" fill="#06B6D4" opacity="0.85"/>
+        <circle cx="191" cy="100" r="2.5" fill="#8B5CF6" opacity="0.75"/>
+        <circle cx="100" cy="191" r="2"   fill="#06B6D4" opacity="0.6"/>
+      </svg>
+
+      <!-- Orbiting particles -->
+      <div class="orbit-particle op-1"></div>
+      <div class="orbit-particle op-2"></div>
+      <div class="orbit-particle op-3"></div>
+    </div>
+
+    <!-- Hero text (below star) -->
+    <div class="hero-content" id="heroContent">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        IIM Udaipur · PM Club
+      </div>
+      <h1 class="hero-title fade-up"><span class="grad-text">ProdCast</span></h1>
+      <p class="hero-sub fade-up">Product Management Club</p>
+      <div class="hero-tagline">
+        <span class="tagline-txt" id="taglineTxt">Building Tomorrow's Product Leaders</span>
+      </div>
+      <div class="hero-ctas fade-up">
+        <a href="#scroll-story"  class="btn btn-primary magnetic-btn">Discover Our Universe ↓</a>
+        <a href="frameworks.html" class="btn btn-ghost magnetic-btn">PM Frameworks →</a>
+      </div>
+    </div>
+
+    <a href="#scroll-story" class="scroll-hint" aria-label="Scroll down">
+      <span class="scroll-dot-anim"></span>
+    </a>
+  </section>
+
+  <!-- ══════════════  SCROLL STORY — About reveal  ══════════════ -->
+  <div class="scroll-story-wrapper" id="scrollStoryWrapper">
+    <div class="scroll-story-sticky" id="scrollStorySticky">
+
+      <!-- Giant BG star -->
+      <div class="story-star-echo" id="storyStarEcho">
+        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="ssGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%"   stop-color="rgba(255,255,255,0.07)"/>
+              <stop offset="100%" stop-color="rgba(139,92,246,0.02)"/>
+            </radialGradient>
+          </defs>
+          <polygon
+            points="100,20 122.3,69.3 176.1,75.3 136.1,111.7 147,164.7 100,138 53,164.7 63.9,111.7 23.9,75.3 77.7,69.3"
+            fill="url(#ssGrad)"/>
+          <circle cx="100" cy="100" r="91" fill="none" stroke="rgba(6,182,212,0.07)" stroke-width="1" stroke-dasharray="4 7"/>
+          <circle cx="100" cy="100" r="75" fill="none" stroke="rgba(139,92,246,0.05)" stroke-width="1" stroke-dasharray="2 9"/>
+        </svg>
+      </div>
+
+      <!-- Left panel -->
+      <div class="story-panel story-left" id="storyPanelLeft">
+        <div class="story-eyebrow">About ProdCast</div>
+        <h2 class="story-title">Where <span class="grad-text">Product Builders</span><br/>are made.</h2>
+        <p class="story-body">ProdCast is the official Product Management Club of IIM Udaipur — a launchpad for future product leaders who think in systems, build with empathy, and ship with conviction.</p>
+        <div class="story-founded-badge">
+          <span class="story-year">2024</span>
+          <div class="story-founded-info">
+            <strong>Founded at IIM Udaipur</strong>
+            <span>Rajasthan, India</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right panel -->
+      <div class="story-panel story-right" id="storyPanelRight">
+        <div class="story-stats-grid">
+          <div class="story-stat">
+            <span class="story-stat-num grad-text">50+</span>
+            <span class="story-stat-label">Active Members</span>
+          </div>
+          <div class="story-stat">
+            <span class="story-stat-num grad-text">9</span>
+            <span class="story-stat-label">Flagship Initiatives</span>
+          </div>
+          <div class="story-stat">
+            <span class="story-stat-num grad-text">15+</span>
+            <span class="story-stat-label">Events Hosted</span>
+          </div>
+          <div class="story-stat">
+            <span class="story-stat-num grad-text">#1</span>
+            <span class="story-stat-label">PM Club at IIMU</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════  HELIX — 3D Flagship Initiatives  ══════════ -->
+  <div class="helix-wrapper" id="helixWrapper">
+    <div class="helix-sticky" id="helixSticky">
+
+      <div class="helix-header">
+        <span class="sec-badge">What We Did Last Year</span>
+        <h2 class="helix-main-title">Our <span class="grad-text">Flagship Initiatives</span></h2>
+      </div>
+
+      <div class="helix-scene-wrap" id="helixSceneWrap">
+        <div class="helix-scene" id="helixScene"></div>
+      </div>
+
+      <div class="helix-detail" id="helixDetail">
+        <div class="helix-detail-index" id="helixDetailNum">01</div>
+        <h3 class="helix-detail-name" id="helixDetailName">&nbsp;</h3>
+        <p class="helix-detail-desc" id="helixDetailDesc">&nbsp;</p>
+        <div class="helix-nav-dots" id="helixDots"></div>
+      </div>
+
+      <div class="helix-scroll-hint">
+        <span>Scroll to explore all 9 initiatives</span>
+        <div class="helix-progress-wrap">
+          <div class="helix-progress-fill" id="helixProgressFill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════  MISSION & VISION  ══════════════════════════ -->
+  <section class="section mv-section" id="mission-vision">
+    <div class="container">
+      <div class="mv-hero-grid">
+        <div class="mvh-card mvh-mission fade-up">
+          <div class="mvh-eyebrow">
+            <span class="mvh-icon">🎯</span>
+            <span>Our Mission</span>
+          </div>
+          <h2 class="mvh-title">Bridge the gap between <span class="grad-text">ideas and impact.</span></h2>
+          <p class="mvh-body">To empower IIM Udaipur students to think like product builders — bridging business strategy, user empathy, and technical execution through hands-on learning, community, and real industry exposure.</p>
+          <div class="mvh-tag-row">
+            <span class="mvh-tag">Product Thinking</span>
+            <span class="mvh-tag">User Empathy</span>
+            <span class="mvh-tag">Strategic Execution</span>
+          </div>
+        </div>
+        <div class="mvh-card mvh-vision fade-up" style="transition-delay:0.15s">
+          <div class="mvh-eyebrow">
+            <span class="mvh-icon">🔭</span>
+            <span>Our Vision</span>
+          </div>
+          <h2 class="mvh-title">Become India's <span class="grad-text">premier PM talent engine</span> from B-school.</h2>
+          <p class="mvh-body">To establish ProdCast as the defining Product Management hub among India's top B-schools — producing PMs who design category-defining products, write robust PRDs, and launch with conviction.</p>
+          <div class="mvh-tag-row">
+            <span class="mvh-tag">Innovation</span>
+            <span class="mvh-tag">Leadership</span>
+            <span class="mvh-tag">Community</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  CURRENT YEAR PLAN  ══════════════════════ -->
+  <section class="section sec-alt" id="projects">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">Vault</span>
+        <div class="reveal-mask">
+          <h2 class="sec-title glitch-text" data-text="Club Year Plan & Content">Club <span class="grad-text">Year Plan &amp; Content</span></h2>
+        </div>
+        <p class="sec-desc">Explore our active year roadmap and the ProdNew Instagram pipeline archives.</p>
+      </div>
+
+      <div class="tab-row">
+        <button class="tab active" data-tab="yearRoadmapPane">📋 Year Plan</button>
+        <button class="tab" data-tab="prodnewPane">📸 ProdNew Feed</button>
+      </div>
+
+      <div class="tab-pane active" id="yearRoadmapPane">
+        <div class="roadmap-dashboard glass fade-up" id="roadmapDashboard">
+          <div class="dashboard-info">
+            <h3>Your Participation Journey</h3>
+            <p>Check off completed events to track your ProdCast journey.</p>
+          </div>
+          <div class="dashboard-progress">
+            <div class="progress-ring-container">
+              <svg class="progress-ring" width="60" height="60">
+                <circle class="progress-ring-circle-bg" stroke="rgba(255,255,255,0.06)" stroke-width="4" fill="transparent" r="24" cx="30" cy="30"/>
+                <circle class="progress-ring-circle" id="roadmapProgressRing" stroke="url(#dashGrad)" stroke-width="4" fill="transparent" r="24" cx="30" cy="30"/>
+                <defs>
+                  <linearGradient id="dashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#8B5CF6"/>
+                    <stop offset="100%" stop-color="#06B6D4"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="progress-pct" id="roadmapProgressPct">0%</div>
+            </div>
+            <div class="progress-stats">
+              <span class="stats-count" id="roadmapProgressStats">0 / 0 Completed</span>
+              <button class="reset-progress-btn" id="resetRoadmapProgressBtn">Reset Tracker</button>
+            </div>
+          </div>
+        </div>
+        <div class="timeline scroll-velocity-warp" id="timelineEl"></div>
+      </div>
+
+      <div class="tab-pane" id="prodnewPane">
+        <div class="filter-row" id="prodnewFilters">
+          <button class="filt active" data-f="all">All</button>
+          <button class="filt" data-f="published">✅ Published</button>
+          <button class="filt" data-f="scheduled">📅 Scheduled</button>
+          <button class="filt" data-f="drafting">✏️ Drafting</button>
+        </div>
+        <div class="prodnew-grid scroll-velocity-warp" id="prodnewGrid"></div>
+      </div>
+
+      <div class="fw-teaser-cta glass fade-up" style="margin-top:60px">
+        <div class="fw-teaser-cta-text">
+          <h3>PM Frameworks Digital Library</h3>
+          <p>Access our repository containing 15 frameworks with dynamic visualizations, examples, and deep-dive links.</p>
+        </div>
+        <a href="frameworks.html" class="btn btn-primary fw-open-btn magnetic-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Open Frameworks Library
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  PM JOURNEY  ══════════════════════════════ -->
+  <section class="section" id="pm-roadmap">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">Learning Flow</span>
+        <div class="reveal-mask">
+          <h2 class="sec-title glitch-text" data-text="The Product Manager Journey">The Product <span class="grad-text">Manager Journey</span></h2>
+        </div>
+        <p class="sec-desc">Explore the 7 stages of product execution. Click any milestone to open skills, resources, and project backlogs.</p>
+      </div>
+      <div class="pm-journey-wrapper">
+        <div class="journey-laser-track">
+          <div class="laser-beam" id="laserBeam"></div>
+        </div>
+        <div class="pm-journey-nodes" id="pmJourneyNodes"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  EVENTS & WINNERS  ═══════════════════════ -->
+  <section class="section sec-alt" id="events">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">Calendar &amp; Fame</span>
+        <div class="reveal-mask">
+          <h2 class="sec-title glitch-text" data-text="Events & Winners Universe">Events &amp; <span class="grad-text">Winners Universe</span></h2>
+        </div>
+        <p class="sec-desc">Enter the orbits of our interactive workshops, hackathons, and mock interview clinics.</p>
+      </div>
+      <div class="tab-row">
+        <button class="tab active" data-tab="eventsUniversePane">🎪 Events Universe</button>
+        <button class="tab" data-tab="winnersUniversePane">🏆 Hall of Fame</button>
+      </div>
+      <div class="tab-pane active" id="eventsUniversePane">
+        <div class="holographic-grid scroll-velocity-warp" id="eventsUniverseGrid"></div>
+      </div>
+      <div class="tab-pane" id="winnersUniversePane">
+        <div class="winners-grid scroll-velocity-warp" id="winnersUniverseGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  TEAM  ═════════════════════════════════════ -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">Team Universe</span>
+        <div class="reveal-mask">
+          <h2 class="sec-title glitch-text" data-text="Orbiting the Core System">Orbiting the <span class="grad-text">Core System</span></h2>
+        </div>
+        <p class="sec-desc">Hover over any orbital ring to pause, or click a lead node to extract their contribution profile.</p>
+      </div>
+      <div class="solar-system-wrapper fade-up">
+        <div class="solar-system" id="solarSystem">
+          <div class="sun-node" id="sunNode">
+            <div class="sun-aura"></div>
+            <div class="sun-avatar">PC</div>
+            <div class="sun-label">President</div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile-team-fallback" id="mobileTeamFallback"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════  NETWORK  ══════════════════════════════════ -->
+  <section class="section sec-alt" id="connections">
+    <div class="container">
+      <div class="sec-head">
+        <span class="sec-badge">Ecosystem</span>
+        <div class="reveal-mask">
+          <h2 class="sec-title glitch-text" data-text="Industry Network Graph">Industry <span class="grad-text">Network Graph</span></h2>
+        </div>
+        <p class="sec-desc">Hover over nodes to illuminate glowing links connecting our Mentors, Alumni, and Corporate Partners.</p>
+      </div>
+      <div class="network-container glass fade-up">
+        <canvas id="networkCanvas" class="network-canvas"></canvas>
+        <div class="network-tooltip" id="networkTooltip"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════  FOOTER  ══════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo-wrap">
+            <img src="assets/logo.png" alt="ProdCast" class="footer-logo-img" />
+          </div>
+          <p class="footer-tagline">ProdCast PM Club<br/>Future Headquarters of Innovators</p>
+          <div class="footer-socials">
+            <a href="#" class="soc-btn" aria-label="Instagram" title="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+            <a href="#" class="soc-btn" aria-label="LinkedIn" title="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="#" class="soc-btn" aria-label="Twitter / X" title="Twitter / X">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#scroll-story">About Us</a></li>
+            <li><a href="#helix-section">Initiatives</a></li>
+            <li><a href="#pm-roadmap">PM Journey</a></li>
+            <li><a href="#events">Events</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="#connections">Industry Network</a></li>
+            <li><a href="#projects">Year Plan</a></li>
+            <li><a href="frameworks.html">Frameworks Library ↗</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:prodcast@iimu.ac.in">prodcast@iimu.ac.in</a></li>
+            <li><span>IIM Udaipur, Rajasthan</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 ProdCast – Product Management Club, IIM Udaipur</p>
+        <p>Made with ❤️ by the ProdCast Tech Team</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════  OVERLAY PANELS  ══════════════════════════ -->
+  <div class="panel-backdrop" id="panelBackdrop"></div>
+
+  <div class="side-overlay-panel" id="journeyStagePanel">
+    <button class="panel-close-btn" id="journeyPanelCloseBtn" aria-label="Close panel">×</button>
+    <div class="panel-stage-header">
+      <div class="panel-stage-icon" id="stageIcon">🔍</div>
+      <div class="panel-stage-meta">
+        <span class="panel-stage-number" id="stageNumber">Stage 1</span>
+        <h2 class="panel-stage-name" id="stageName">Discover</h2>
+      </div>
+    </div>
+    <div class="panel-stage-body">
+      <p class="panel-stage-tagline" id="stageTagline"></p>
+      <div class="panel-block">
+        <h4><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg> Core Skills Required</h4>
+        <ul class="panel-skills-list" id="stageSkills"></ul>
+      </div>
+      <div class="panel-block">
+        <h4><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> Core Reading &amp; Resources</h4>
+        <div class="panel-resources-list" id="stageResources"></div>
+      </div>
+      <div class="panel-block">
+        <h4><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Club Workshops</h4>
+        <ul class="panel-workshops-list" id="stageWorkshops"></ul>
+      </div>
+      <div class="panel-block">
+        <h4><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/><polyline points="5 3 5 21"/></svg> Recommended Projects</h4>
+        <ul class="panel-projects-list" id="stageProjects"></ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-overlay-panel" id="teamProfilePanel">
+    <button class="panel-close-btn" id="teamPanelCloseBtn" aria-label="Close panel">×</button>
+    <div class="panel-team-header">
+      <div class="panel-team-avatar" id="teamMemberAvatar"></div>
+      <div class="panel-team-meta">
+        <h2 class="panel-team-name" id="teamMemberName"></h2>
+        <span class="panel-team-role" id="teamMemberRole"></span>
+        <span class="panel-team-batch" id="teamMemberBatch"></span>
+      </div>
+    </div>
+    <div class="panel-team-body">
+      <div class="panel-block">
+        <h4>About</h4>
+        <p class="panel-team-bio" id="teamMemberBio"></p>
+      </div>
+      <div class="panel-block">
+        <h4>Contributions</h4>
+        <p class="panel-team-contributions" id="teamMemberContributions"></p>
+      </div>
+      <div class="panel-block" style="margin-top:24px">
+        <a href="#" class="linkedin-btn" id="teamMemberLinkedIn" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cursor / curtain / noise -->
+  <div class="cursor-follower" id="cursorFollower"></div>
+  <div id="pageCurtain"></div>
+  <canvas id="noiseCanvas"></canvas>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
