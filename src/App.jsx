@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import Lenis from 'lenis'
+import { Analytics } from '@vercel/analytics/react'
 
 import Intro from './components/Intro'
 import Header from './components/Header'
@@ -128,6 +129,7 @@ function App() {
         <Header />
         <MainArea />
       </div>
+      <Analytics />
     </BrowserRouter>
   )
 }
