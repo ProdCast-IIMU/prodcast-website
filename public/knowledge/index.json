@@ -1,9 +1,72 @@
 [
   {
+    "id": "circles-framework",
+    "title": "The CIRCLES Framework for Product Design",
+    "summary": "The go-to PM interview framework for design questions. A 7-step method to structure any product design problem from clarification to recommendation.",
+    "category": "Framework",
+    "date": "JUN 2026",
+    "readTime": "7 min read"
+  },
+  {
+    "id": "north-star-metric",
+    "title": "The North Star Metric",
+    "summary": "The single metric that captures the core value your product delivers. Learn how to find yours, avoid the pitfalls, and build a metric tree beneath it.",
+    "category": "Framework",
+    "date": "JUN 2026",
+    "readTime": "6 min read"
+  },
+  {
+    "id": "rice-prioritization",
+    "title": "RICE: Prioritising Features Without the Drama",
+    "summary": "Reach × Impact × Confidence ÷ Effort. A repeatable scoring system that kills gut-feel prioritisation debates and surfaces what to build next.",
+    "category": "Framework",
+    "date": "JUN 2026",
+    "readTime": "5 min read"
+  },
+  {
+    "id": "heart-framework",
+    "title": "Google's HEART Framework for UX Metrics",
+    "summary": "Happiness, Engagement, Adoption, Retention, Task Success. Google's structured approach to measuring user experience beyond vanity metrics.",
+    "category": "Framework",
+    "date": "JUN 2026",
+    "readTime": "6 min read"
+  },
+  {
+    "id": "jobs-to-be-done",
+    "title": "Jobs To Be Done (JTBD)",
+    "summary": "People don't buy products — they hire them to do a job. Learn how JTBD reframes user research and unlocks the real competition your product faces.",
+    "category": "Framework",
+    "date": "JUN 2026",
+    "readTime": "8 min read"
+  },
+  {
+    "id": "kano-model",
+    "title": "The Kano Model: What Users Want vs. What Delights Them",
+    "summary": "Not all features are equal. The Kano Model classifies features into Basics, Performance, and Delighters — and explains why delighters decay into basics over time.",
+    "category": "Framework",
+    "date": "JUN 2026",
+    "readTime": "6 min read"
+  },
+  {
+    "id": "root-cause-analysis",
+    "title": "Root Cause Analysis for PMs",
+    "summary": "When metrics drop, don't treat symptoms. Learn the 5 Whys, metric decomposition, and a complete RCA checklist for diagnosing any product problem.",
+    "category": "Strategy",
+    "date": "JUN 2026",
+    "readTime": "7 min read"
+  },
+  {
+    "id": "okrs-for-pms",
+    "title": "OKRs for Product Managers",
+    "summary": "Objectives and Key Results done right. The difference between outputs and outcomes, how to write ambitious Key Results, and the most common OKR mistakes.",
+    "category": "Strategy",
+    "date": "JUN 2026",
+    "readTime": "7 min read"
+  },
+  {
     "id": "product-teardown-framework",
     "title": "The Ultimate Product Teardown Framework",
-    "summary": "A structured approach to deconstructing any product to understand its core loop, UX, and monetization strategy. Includes a sample product discovery framework.",
-    "excerpt": "A structured approach to deconstructing any product to understand its core loop, UX, and monetization strategy. Includes a sample product discovery framework.",
+    "summary": "A structured approach to deconstructing any product to understand its core loop, UX, and monetization strategy.",
     "category": "Framework",
     "date": "APR 2026",
     "readTime": "5 min read"
@@ -12,7 +75,6 @@
     "id": "pr-faq-amazon",
     "title": "Writing an Amazon PR/FAQ",
     "summary": "Learn how to work backwards from the customer using the famous Amazon Press Release / FAQ format.",
-    "excerpt": "Learn how to work backwards from the customer using the famous Amazon Press Release / FAQ format.",
     "category": "Case Study",
     "date": "MAY 2026",
     "readTime": "8 min read"
