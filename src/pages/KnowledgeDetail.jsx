@@ -8,13 +8,10 @@ export default function KnowledgeDetail() {
   const { id } = useParams()
   const [metadata, setMetadata] = useState(null)
   const [markdown, setMarkdown] = useState('')
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [loading, setLoading]   = useState(true)
+  const [error, setError]       = useState(null)
 
-  // Scroll to top on mount
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   useEffect(() => {
     let active = true
@@ -23,117 +20,102 @@ export default function KnowledgeDetail() {
 
     async function fetchData() {
       try {
-        // Step 1: Fetch index.json to retrieve the metadata for this article
         const indexRes = await fetch('/knowledge/index.json')
         let meta = null
         if (indexRes.ok) {
           const indexData = await indexRes.json()
-          if (Array.isArray(indexData)) {
-            meta = indexData.find(item => item.id === id)
-          }
+          if (Array.isArray(indexData)) meta = indexData.find(item => item.id === id)
         }
-
-        // Step 2: Fetch the corresponding markdown file content
         const mdRes = await fetch(`/knowledge/${id}.md`)
-        if (!mdRes.ok) {
-          throw new Error('Markdown content file not found (404)')
-        }
+        if (!mdRes.ok) throw new Error('Article not found')
         const text = await mdRes.text()
-
-        if (active) {
-          setMetadata(meta)
-          setMarkdown(text)
-          setLoading(false)
-        }
+        if (active) { setMetadata(meta); setMarkdown(text); setLoading(false) }
       } catch (err) {
-        if (active) {
-          setError(err.message || 'An error occurred while fetching the article')
-          setLoading(false)
-        }
+        if (active) { setError(err.message); setLoading(false) }
       }
     }
-
     fetchData()
-    return () => {
-      active = false
-    }
+    return () => { active = false }
   }, [id])
 
-  // Loading skeleton state
   if (loading) {
     return (
-      <div data-testid="loading" className="knowledge-detail-container min-h-screen pt-32 px-6 md:px-16 lg:px-24 bg-background">
+      <div className="min-h-screen pt-32 px-6 md:px-16 lg:px-24" style={{ background: '#060C18' }}>
         <div className="max-w-3xl mx-auto animate-pulse">
-          <div className="h-4 bg-slate-200 w-24 mb-12 rounded"></div>
-          <div className="h-10 bg-slate-200 w-3/4 mb-6 rounded"></div>
-          <div className="h-4 bg-slate-200 w-48 mb-8 rounded"></div>
+          <div className="h-3 w-20 rounded-full mb-12 " style={{ background: 'rgba(77,186,255,0.15)' }} />
+          <div className="h-10 w-2/3 rounded-xl mb-6" style={{ background: 'rgba(77,186,255,0.1)' }} />
+          <div className="h-3 w-32 rounded mb-10" style={{ background: 'rgba(77,186,255,0.08)' }} />
           <div className="space-y-4">
-            <div className="h-4 bg-slate-200 w-full rounded"></div>
-            <div className="h-4 bg-slate-200 w-full rounded"></div>
-            <div className="h-4 bg-slate-200 w-5/6 rounded"></div>
+            {[1,2,3,4].map(n => <div key={n} className="h-4 rounded" style={{ background: 'rgba(77,186,255,0.07)', width: `${70 + n * 7}%` }} />)}
           </div>
         </div>
       </div>
     )
   }
 
-  // Error / 404 state handling
   if (error) {
     return (
-      <div className="knowledge-detail-container min-h-screen pt-32 px-6 md:px-16 lg:px-24 bg-background flex flex-col items-center justify-center text-center">
-        <div className="max-w-md mx-auto py-20 bg-white border border-border rounded-2xl px-6">
-          <h2 className="text-3xl font-black text-foreground mb-4">Article Not Found</h2>
-          <p className="text-muted-foreground mb-8">
-            The requested knowledge article doesn't exist or could not be retrieved due to an error. (Error: {error})
-          </p>
-          <Link
-            to="/knowledge"
-            data-testid="back-to-hub"
-            className="back-to-hub px-6 py-2.5 rounded-full border border-black bg-black text-white text-xs font-mono tracking-widest uppercase hover:bg-white hover:text-black transition-colors"
-          >
-            Back to Hub
-          </Link>
+      <div className="min-h-screen pt-32 flex items-center justify-center px-6 text-center" style={{ background: '#060C18' }}>
+        <div className="max-w-md">
+          <p className="section-num mb-4">404</p>
+          <h2 className="text-3xl font-black text-ice mb-4">Article Not Found</h2>
+          <p className="font-light mb-8" style={{ color: 'rgba(240,248,255,0.5)' }}>{error}</p>
+          <Link to="/knowledge" className="btn-ghost">Back to Hub</Link>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="knowledge-detail-container min-h-screen pt-32 pb-32 px-6 md:px-16 lg:px-24 bg-background text-foreground">
-      <div className="max-w-3xl mx-auto">
-        {/* Back Link */}
+    <div className="min-h-screen pt-32 pb-32 px-6 md:px-16 lg:px-24" style={{ background: '#060C18' }}>
+      {/* Ambient glow */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] pointer-events-none z-0"
+        style={{ background: 'radial-gradient(ellipse at top, rgba(77,186,255,0.07), transparent 65%)', filter: 'blur(40px)' }} />
+
+      <div className="relative max-w-3xl mx-auto">
         <Link
           to="/knowledge"
-          data-testid="back-to-hub"
-          className="back-to-hub inline-flex items-center gap-2 mb-12 label-mono text-muted-foreground hover:text-foreground transition-colors group text-xs font-mono font-semibold"
+          className="inline-flex items-center gap-2 mb-12 group"
+          style={{ color: 'rgba(77,186,255,0.6)', fontFamily: 'JetBrains Mono', fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase' }}
         >
-          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <ChevronLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
           Back to Hub
         </Link>
 
-        {/* Metadata Block */}
-        <div className="metadata-container article-metadata flex items-center gap-4 mb-8 text-xs font-mono text-muted-foreground">
-          <span
-            data-testid="category-badge"
-            className="category tag font-bold tracking-[0.15em] uppercase px-2 py-1 bg-slate-100 text-slate-600 rounded animate-none"
-          >
-            {metadata?.category || 'Framework'}
+        {/* Meta */}
+        <div className="flex flex-wrap items-center gap-3 mb-8">
+          {metadata?.category && (
+            <span className="px-2.5 py-1 rounded-full text-[0.55rem] font-mono tracking-[0.18em]"
+              style={{ background: 'rgba(77,186,255,0.12)', border: '1px solid rgba(77,186,255,0.3)', color: '#4DBAFF' }}>
+              {metadata.category.toUpperCase()}
+            </span>
+          )}
+          <span className="font-mono text-[0.58rem] tracking-widest" style={{ color: 'rgba(240,248,255,0.4)' }}>
+            {metadata?.date || ''}
           </span>
-          <span className="date publish-date">{metadata?.date || 'APR 2026'}</span>
           {metadata?.readTime && (
-            <>
-              <span>•</span>
-              <span className="read-time">{metadata.readTime}</span>
-            </>
+            <span className="font-mono text-[0.58rem] tracking-widest" style={{ color: 'rgba(240,248,255,0.4)' }}>
+              · {metadata.readTime}
+            </span>
           )}
         </div>
 
-        {/* Article content wrapped in prose for Tailwind Typography */}
+        {/* Article */}
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="prose prose-slate lg:prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline"
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="prose max-w-none"
+          style={{
+            '--tw-prose-body': 'rgba(240,248,255,0.7)',
+            '--tw-prose-headings': '#F0F8FF',
+            '--tw-prose-links': '#4DBAFF',
+            '--tw-prose-bold': '#F0F8FF',
+            '--tw-prose-code': '#00E5C8',
+            '--tw-prose-quotes': 'rgba(240,248,255,0.6)',
+            '--tw-prose-quote-borders': 'rgba(77,186,255,0.4)',
+            color: 'rgba(240,248,255,0.7)',
+          }}
         >
           <ReactMarkdown skipHtml={true}>{markdown}</ReactMarkdown>
         </motion.article>

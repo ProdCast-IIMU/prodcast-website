@@ -5,17 +5,21 @@ import Lenis from 'lenis'
 
 import Intro from './components/Intro'
 import Header from './components/Header'
+import ScrollProgress from './components/ScrollProgress'
 import SectionDivider from './components/SectionDivider'
 import HeroSection from './components/HeroSection'
 import AboutSection from './components/AboutSection'
 import GallerySection from './components/GallerySection'
 import MissionVisionSection from './components/MissionVisionSection'
 import CurrentYearPlan from './components/CurrentYearPlan'
+import TeamSection from './components/TeamSection'
+import InstagramSection from './components/InstagramSection'
 import Footer from './components/Footer'
 import FloatingGuide from './components/FloatingGuide'
 import EventDetail from './pages/EventDetail'
 import KnowledgeHub from './pages/KnowledgeHub'
 import KnowledgeDetail from './pages/KnowledgeDetail'
+import NotFound from './pages/NotFound'
 
 function Home() {
   return (
@@ -25,8 +29,14 @@ function Home() {
       <AboutSection />
       <SectionDivider color="#0A1628" flip />
       <GallerySection />
+      <SectionDivider color="#060C18" />
       <MissionVisionSection />
+      <SectionDivider color="#0A1628" flip />
       <CurrentYearPlan />
+      <SectionDivider color="#060C18" />
+      <TeamSection />
+      <SectionDivider color="#0A1628" flip />
+      <InstagramSection />
       <Footer />
       <FloatingGuide />
     </>
@@ -56,8 +66,13 @@ function MainArea() {
           <Routes location={location} key={path}>
             <Route path="/knowledge" element={<KnowledgeHub />} />
             <Route path="/knowledge/:id" element={<KnowledgeDetail />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
+      )}
+
+      {!isKnowledge && !eventId && path !== '/' && (
+        <NotFound />
       )}
 
       <AnimatePresence>
@@ -77,8 +92,13 @@ function App() {
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smooth: true,
+      smoothWheel: true,
     })
+
+    // Bridge: framer-motion's useScroll listens for native scroll events,
+    // which Lenis doesn't always emit — dispatch one on every Lenis tick so
+    // all scroll-linked animations (parallax, events track, progress bar) update.
+    lenis.on('scroll', () => window.dispatchEvent(new Event('scroll')))
 
     function raf(time) {
       lenis.raf(time)
@@ -104,6 +124,7 @@ function App() {
         }} />
       )}
       <div className="bg-background min-h-screen">
+        <ScrollProgress />
         <Header />
         <MainArea />
       </div>

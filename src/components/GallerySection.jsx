@@ -2,17 +2,34 @@ import React, { useRef, useEffect, useLayoutEffect, useState, useCallback } from
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { ArrowUpRight, Sparkles } from 'lucide-react'
+import { textReveal } from '../lib/motion'
 
 import imgFlagship from '../assets/ev_flagship.jpg'
-import imgTeardown from '../assets/ev_teardown.jpg'
-import imgLabs     from '../assets/ev_labs.jpg'
-import imgLearning from '../assets/ev_learning.jpg'
-import imgSketch   from '../assets/ev_sketchify.jpg'
 import imgTrap     from '../assets/ev_trap.jpg'
-// Prod360 — real event photos
+// Prod360
 import imgProd360Poster  from '../assets/ev1_prod360_a.jpg'
 import imgProd360Speaker from '../assets/ev1_prod360_b.jpg'
 import imgProd360Room    from '../assets/ev1_prod360_c.jpg'
+// InsideIIM
+import imgInsideIIM from '../assets/ev2_insideiim.png'
+// ProdUxpert
+import imgProdUxpert1 from '../assets/ev3_produxpert_a.jpg'
+import imgProdUxpert2 from '../assets/ev3_produxpert_b.png'
+// ProdLabs
+import imgProdLabs1 from '../assets/ev4_prodlabs_a.png'
+import imgProdLabs2 from '../assets/ev4_prodlabs_b.jpg'
+import imgProdLabs3 from '../assets/ev4_prodlabs_c.jpg'
+// Sketchify
+import imgSketch1 from '../assets/ev5_sketchify_a.png'
+import imgSketch2 from '../assets/ev5_sketchify_b.jpg'
+// ProdShot
+import imgProdShot1 from '../assets/ev7_prodshot_a.png'
+import imgProdShot2 from '../assets/ev7_prodshot_b.png'
+// Product Teardowns
+import imgTeardown1 from '../assets/ev8_teardown_a.png'
+import imgTeardown2 from '../assets/ev8_teardown_b.png'
+// PM Companion
+import imgPMCompanion from '../assets/ev9_pmcompanion.png'
 
 /* ── Category palette (filter + accents) ── */
 export const CATEGORY = {
@@ -41,7 +58,7 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev2', title: 'InsideIIM', subtitle: 'PM Interviews Course',
-    type: 'COURSE', category: 'Learning', date: 'SEP', image: imgLearning,
+    type: 'COURSE', category: 'Learning', date: 'SEP', image: imgInsideIIM,
     stat: 'Mentor: Sohum Sen',
     desc: 'A comprehensive series of interactive Zoom sessions designed to equip students with core PM skills.',
     longDesc: 'Run as a structured course, InsideIIM walked students through PM frameworks, applications, and interview techniques, building real clarity on how to answer structured questions effectively.',
@@ -55,7 +72,8 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev3', title: 'ProdUxpert', subtitle: 'GenAI & Vibe Coding',
-    type: 'WORKSHOP', category: 'Workshop', date: 'NOV', image: imgTeardown,
+    type: 'WORKSHOP', category: 'Workshop', date: 'NOV', image: imgProdUxpert1,
+    gallery: [imgProdUxpert1, imgProdUxpert2],
     stat: '15+ students online',
     desc: 'An interactive online session introducing Software 3.0, where students learned to combine prompt engineering with agentic automation.',
     longDesc: 'ProdUxpert explored the frontier of GenAI and vibe coding, exploring how product builders can pair prompt engineering with agentic automation to move from idea to working software faster than ever.',
@@ -69,7 +87,8 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev4', title: 'ProdLabs', subtitle: 'Innovation Challenge',
-    type: 'COMPETITION', category: 'Competition', date: 'DEC', image: imgLabs,
+    type: 'COMPETITION', category: 'Competition', date: 'DEC', image: imgProdLabs1,
+    gallery: [imgProdLabs1, imgProdLabs2, imgProdLabs3],
     stat: '10+ teams',
     desc: 'ProdLabs challenged students to identify problems related to IIMU and build viable prototypes and solutions.',
     longDesc: 'A hands-on innovation challenge where over ten teams scoped real IIMU problems and built working prototypes, a true test of problem-solving and rapid prototyping under time pressure.',
@@ -83,7 +102,8 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev5', title: 'Sketchify', subtitle: 'Draw & Decode',
-    type: 'COMPETITION', category: 'Competition', date: 'FEB', image: imgSketch,
+    type: 'COMPETITION', category: 'Competition', date: 'FEB', image: imgSketch1,
+    gallery: [imgSketch1, imgSketch2],
     stat: '20 participants',
     desc: 'A test of brand recall and creative chaos: students decoded brands through live sketching and analyst logic.',
     longDesc: 'Sketchify turned brand strategy into a game where teams sketched and guessed the parent company behind products, blending creative recall with sharp analyst logic in a fast, fun format.',
@@ -111,7 +131,8 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev7', title: 'ProdShot', subtitle: 'Weekly Knowledge Bites',
-    type: 'INITIATIVE', category: 'Resources', date: 'ONGOING', image: imgFlagship,
+    type: 'INITIATIVE', category: 'Resources', date: 'ONGOING', image: imgProdShot1,
+    gallery: [imgProdShot1, imgProdShot2],
     stat: 'Weekly on Instagram',
     desc: 'ProdShot is our dedicated social media initiative to demystify complex Product Management concepts.',
     longDesc: 'A continuous learning initiative beyond the classroom, with weekly Instagram posts and infographics that break down core PM concepts into bite-sized, shareable knowledge.',
@@ -124,7 +145,8 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev8', title: 'Product Teardowns', subtitle: 'Deep-dive Analyses',
-    type: 'ANALYSIS', category: 'Workshop', date: 'MONTHLY', image: imgTeardown,
+    type: 'ANALYSIS', category: 'Workshop', date: 'MONTHLY', image: imgTeardown1,
+    gallery: [imgTeardown1, imgTeardown2],
     stat: 'Duolingo · Gemini · Zepto',
     desc: 'Deep-dive analyses into successful products to understand their strategy, UX, and monetization.',
     longDesc: 'A recurring teardown series dissecting standout products: Duolingo (gamification & retention), Gemini (multimodal AI strategy), and Zepto (the 10-minute delivery model).',
@@ -137,7 +159,7 @@ export const EVENTS_DB = [
   },
   {
     id: 'ev9', title: 'The PM Companion', subtitle: 'A Guide by ProdCast',
-    type: 'RESOURCE', category: 'Resources', date: 'SEP', image: imgLearning,
+    type: 'RESOURCE', category: 'Resources', date: 'SEP', image: imgPMCompanion,
     stat: 'Casebook & guide',
     desc: 'A comprehensive casebook and interview guide shared with students to assist with Summer Internship Placement preparation.',
     longDesc: 'The PM Companion is a structured ProdCast resource for navigating PM interviews, a casebook covering frameworks, root cause analysis, product pricing, guesstimates, and metrics.',
@@ -149,11 +171,24 @@ export const EVENTS_DB = [
       { label: 'Status', value: 'Released' },
     ],
   },
+  {
+    id: 'ev10', title: 'Certification Course', subtitle: 'PM by Forevision',
+    type: 'CERTIFICATION', category: 'Learning', date: '2025/26', image: imgFlagship,
+    stat: 'Learning + live project',
+    desc: 'A Product Management certification course by Forevision, offering both structured learning and a live project.',
+    longDesc: 'In partnership with Forevision, the certification course gave students a structured path through PM fundamentals along with a live project to apply the learning in practice.',
+    topics: ['Structured learning', 'Live project', 'Certification'],
+    facts: [
+      { label: 'Partner', value: 'Forevision' },
+      { label: 'Format', value: 'Course + live project' },
+      { label: 'Status', value: 'Completed' },
+    ],
+  },
 ]
 
 const FILTERS = ['All', 'Flagship', 'Competition', 'Workshop', 'Learning', 'Resources']
 
-function EventCard({ evt, index, navigate }) {
+function EventCard({ evt, index, navigate, hasDragged }) {
   const tint = CATEGORY[evt.category] || '#4DBAFF'
   return (
     <motion.div
@@ -163,7 +198,7 @@ function EventCard({ evt, index, navigate }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-      onClick={() => navigate(`/event/${evt.id}`)}
+      onClick={() => { if (!hasDragged.current) navigate(`/event/${evt.id}`) }}
       className="group relative flex-shrink-0 rounded-2xl overflow-hidden cursor-pointer"
       style={{
         width: 'clamp(280px, 30vw, 360px)',
@@ -174,7 +209,7 @@ function EventCard({ evt, index, navigate }) {
     >
       {/* Image */}
       <div className="absolute inset-0">
-        <img src={evt.image} alt={evt.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        <img src={evt.image} alt={evt.title} loading="lazy" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(6,12,24,0.2) 0%, rgba(6,12,24,0.78) 60%, rgba(6,12,24,0.97) 100%)' }} />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: `radial-gradient(ellipse 80% 55% at 50% 100%, ${tint}26 0%, transparent 65%)` }} />
       </div>
@@ -221,6 +256,37 @@ export default function GallerySection() {
   const [distance, setDistance] = useState(0)
   const [sectionH, setSectionH] = useState('100vh')
 
+  // Drag-to-scroll
+  const isDragging   = useRef(false)
+  const hasDragged   = useRef(false)
+  const dragStartX   = useRef(0)
+  const dragStartY   = useRef(0)
+
+  const handlePointerDown = (e) => {
+    if (e.button !== 0) return
+    isDragging.current = true
+    hasDragged.current = false
+    dragStartX.current = e.clientX
+    dragStartY.current = window.scrollY
+  }
+  const handlePointerMove = (e) => {
+    if (!isDragging.current) return
+    const dx = dragStartX.current - e.clientX
+    if (!hasDragged.current) {
+      if (Math.abs(dx) < 5) return
+      hasDragged.current = true
+      e.currentTarget.setPointerCapture(e.pointerId)
+    }
+    const target = dragStartY.current + dx
+    if (window.__lenis) window.__lenis.scrollTo(target, { immediate: true })
+    else window.scrollTo({ top: target, behavior: 'auto' })
+  }
+  const handlePointerUp = () => {
+    isDragging.current = false
+    // Reset after click event fires
+    requestAnimationFrame(() => { hasDragged.current = false })
+  }
+
   const events = filter === 'All' ? EVENTS_DB : EVENTS_DB.filter(e => e.category === filter)
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end end'] })
@@ -266,19 +332,30 @@ export default function GallerySection() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 60% 50% at 65% 55%, rgba(77,186,255,0.08) 0%, transparent 65%)' }} />
 
         {/* Heading */}
-        <div className="relative z-20 pt-24 md:pt-28 px-6 md:px-16">
+        <motion.div
+          className="relative z-20 pt-24 md:pt-28 px-6 md:px-16"
+          variants={textReveal} initial="hidden" whileInView="show" viewport={{ once: true }}
+        >
           <p className="section-num mb-3">02 / WHAT WE SHIPPED</p>
           <h2 className="font-black tracking-[-0.03em] text-ice leading-[1.05]" style={{ fontSize: 'clamp(1.9rem, 4.5vw, 3.6rem)' }}>
             Last year, <span className="text-gradient">compounded.</span>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Horizontal track (middle band) */}
         <div className="relative z-10 flex-1 flex items-center min-h-0">
-          <motion.div ref={trackRef} style={{ x }} className="flex gap-5 md:gap-6 px-6 md:px-16 pr-24 will-change-transform">
+          <motion.div
+            ref={trackRef}
+            style={{ x, cursor: 'grab' }}
+            className="flex gap-5 md:gap-6 px-6 md:px-16 pr-24 will-change-transform select-none"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerLeave={handlePointerUp}
+          >
             <AnimatePresence mode="popLayout">
               {events.map((evt, i) => (
-                <EventCard key={evt.id} evt={evt} index={i} navigate={navigate} />
+                <EventCard key={evt.id} evt={evt} index={i} navigate={navigate} hasDragged={hasDragged} />
               ))}
             </AnimatePresence>
 

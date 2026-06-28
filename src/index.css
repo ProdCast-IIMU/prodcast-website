@@ -21,17 +21,18 @@
     font-weight: 500;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: rgba(77, 186, 255, 0.65);
+    color: rgba(122, 200, 255, 0.85);
   }
 
-  /* ── Section number ──────────────────────────────────── */
+  /* ── Section number (gently breathes) ───────────────── */
   .section-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.62rem;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: rgba(77, 186, 255, 0.45);
+    color: rgba(122, 200, 255, 0.85);
+    animation: eyebrow-breathe 4.5s ease-in-out infinite;
   }
 
   /* ── Dark bento card ─────────────────────────────────── */
@@ -63,6 +64,8 @@
 
   /* ── Primary CTA button ──────────────────────────────── */
   .btn-primary {
+    position: relative;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -75,6 +78,23 @@
     background: linear-gradient(135deg, #4DBAFF 0%, #00E5C8 100%);
     color: #060C18;
     box-shadow: 0 0 24px rgba(77, 186, 255, 0.25);
+  }
+  /* Sheen sweep on hover */
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -80%;
+    width: 45%;
+    height: 100%;
+    transform: skewX(-22deg);
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+    pointer-events: none;
+  }
+  .btn-primary:hover::before { animation: btn-sheen 0.75s ease; }
+  @keyframes btn-sheen {
+    from { left: -80%; }
+    to   { left: 130%; }
   }
   .btn-primary:hover {
     box-shadow: 0 0 40px rgba(77, 186, 255, 0.5), 0 0 80px rgba(0, 229, 200, 0.2);
@@ -107,10 +127,24 @@
 
   /* ── Gradient text ───────────────────────────────────── */
   .text-gradient {
-    background: linear-gradient(135deg, #4DBAFF 0%, #00E5C8 100%);
+    background: linear-gradient(110deg, #4DBAFF 0%, #00E5C8 35%, #9BD4FF 60%, #4DBAFF 100%);
+    background-size: 220% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradient-pan 7s ease-in-out infinite;
+  }
+
+  @keyframes gradient-pan {
+    0%, 100% { background-position: 0% center; }
+    50%      { background-position: 100% center; }
+  }
+  @keyframes eyebrow-breathe {
+    0%, 100% { opacity: 0.8; }
+    50%      { opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .text-gradient, .section-num { animation: none; }
   }
 
   /* ── Glowing divider ─────────────────────────────────── */

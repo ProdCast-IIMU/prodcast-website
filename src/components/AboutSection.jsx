@@ -2,6 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { User, TrendingUp, Code2 } from 'lucide-react'
 import TriangleMotif from './TriangleMotif'
+import { textReveal as reveal } from '../lib/motion'
 
 /* ── The three forces that meet at the North Star ── */
 const PILLARS = [
@@ -9,11 +10,6 @@ const PILLARS = [
   { icon: TrendingUp, label: 'BUSINESS',   tint: '#00E5C8', desc: 'Value that compounds and sustains.' },
   { icon: Code2,      label: 'TECHNOLOGY', tint: '#9B8CFF', desc: 'What is buildable, today and next.' },
 ]
-
-const reveal = {
-  hidden: { opacity: 0, y: 28 },
-  show:   { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-}
 
 export default function AboutSection() {
   return (
@@ -91,17 +87,19 @@ export default function AboutSection() {
                 <motion.div
                   key={p.label}
                   className="bento-card p-7 flex items-start gap-4"
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 18, filter: 'blur(8px)' }}
+                  whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                   viewport={{ once: true, margin: '-60px' }}
-                  transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+                  transition={{ duration: 0.75, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <div
+                  <motion.div
                     className="flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center"
                     style={{ background: `${p.tint}1A`, border: `1px solid ${p.tint}40` }}
+                    animate={{ y: [0, -5, 0] }}
+                    transition={{ duration: 3.5 + i * 0.5, repeat: Infinity, ease: 'easeInOut' }}
                   >
                     <Icon size={20} style={{ color: p.tint }} />
-                  </div>
+                  </motion.div>
                   <div>
                     <h4 className="font-bold tracking-wide text-ice mb-1" style={{ letterSpacing: '0.04em' }}>
                       {p.label}

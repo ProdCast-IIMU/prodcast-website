@@ -1,5 +1,15 @@
-import React, { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import React, { useRef, useState, useEffect } from 'react'
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
+
+function useStarSize() {
+  const [size, setSize] = useState(() => (typeof window !== 'undefined' && window.innerWidth < 768 ? 240 : 380))
+  useEffect(() => {
+    const update = () => setSize(window.innerWidth < 768 ? 240 : 380)
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+  return size
+}
 
 /* ── Constellation star field ── */
 const STARS = [
@@ -113,16 +123,31 @@ function HeroStar({ size = 380 }) {
 
 export default function HeroSection() {
   const ref = useRef(null)
+  const starSize = useStarSize()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
 
   const yText  = useTransform(scrollYProgress, [0, 1], ['0%', '-20%'])
   const yStar  = useTransform(scrollYProgress, [0, 1], ['0%', '-10%'])
   const fade   = useTransform(scrollYProgress, [0, 0.65], [1, 0])
 
+  // Subtle cursor parallax for the North Star
+  const mvX = useMotionValue(0)
+  const mvY = useMotionValue(0)
+  const tiltY = useSpring(mvX, { stiffness: 90, damping: 18 })
+  const tiltX = useSpring(mvY, { stiffness: 90, damping: 18 })
+  const handleMove = (e) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    mvX.set(((e.clientX - r.left) / r.width - 0.5) * 14)   // → rotateY
+    mvY.set(((e.clientY - r.top) / r.height - 0.5) * -14)  // → rotateX
+  }
+  const resetTilt = () => { mvX.set(0); mvY.set(0) }
+
   return (
     <section
       ref={ref}
       data-testid="hero-section"
+      onMouseMove={handleMove}
+      onMouseLeave={resetTilt}
       className="relative w-full min-h-screen flex items-center justify-center overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #060C18 0%, #081223 55%, #0A1628 100%)' }}
     >
@@ -211,15 +236,17 @@ export default function HeroSection() {
 
         </motion.div>
 
-        {/* ── Right: Glassmorphic 3D North Star ── */}
+        {/* ── Right: animated North Star (cursor parallax) ── */}
         <motion.div
           className="flex-shrink-0 relative flex items-center justify-center"
-          style={{ y: yStar }}
+          style={{ y: yStar, perspective: 900 }}
           initial={{ opacity: 0, scale: 0.75 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.25, duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
         >
-          <HeroStar size={380} />
+          <motion.div style={{ rotateX: tiltX, rotateY: tiltY, transformStyle: 'preserve-3d' }}>
+            <HeroStar size={starSize} />
+          </motion.div>
 
           {/* Guided by tagline under star */}
           <motion.div
@@ -228,7 +255,7 @@ export default function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 1.4, duration: 1 }}
           >
-            <span style={{ fontFamily:'JetBrains Mono', fontSize:'0.58rem', letterSpacing:'0.28em', color:'rgba(77,186,255,0.4)', textTransform:'uppercase' }}>
+            <span style={{ fontFamily:'JetBrains Mono', fontSize:'0.58rem', letterSpacing:'0.28em', color:'rgba(122,200,255,0.65)', textTransform:'uppercase' }}>
               Guided by Insight
             </span>
           </motion.div>
@@ -243,7 +270,7 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
       >
-        <span style={{ fontFamily:'JetBrains Mono', fontSize:'0.58rem', letterSpacing:'0.2em', color:'rgba(240,248,255,0.25)', textTransform:'uppercase' }}>
+        <span style={{ fontFamily:'JetBrains Mono', fontSize:'0.58rem', letterSpacing:'0.2em', color:'rgba(240,248,255,0.45)', textTransform:'uppercase' }}>
           Scroll
         </span>
         <motion.div

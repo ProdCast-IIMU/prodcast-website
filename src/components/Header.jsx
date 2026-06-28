@@ -68,9 +68,9 @@ export default function Header() {
                 key={link.label}
                 to={link.href}
                 className="label-mono transition-colors duration-200"
-                style={{ color: active ? '#4DBAFF' : 'rgba(240,248,255,0.45)' }}
+                style={{ color: active ? '#4DBAFF' : 'rgba(240,248,255,0.6)' }}
                 onMouseEnter={e => e.target.style.color = '#4DBAFF'}
-                onMouseLeave={e => e.target.style.color = active ? '#4DBAFF' : 'rgba(240,248,255,0.45)'}
+                onMouseLeave={e => e.target.style.color = active ? '#4DBAFF' : 'rgba(240,248,255,0.6)'}
               >
                 {link.label}
               </Link>
@@ -79,9 +79,9 @@ export default function Header() {
                 key={link.label}
                 href={link.href}
                 className="label-mono transition-colors duration-200"
-                style={{ color: 'rgba(240,248,255,0.45)' }}
+                style={{ color: 'rgba(240,248,255,0.6)' }}
                 onMouseEnter={e => e.target.style.color = '#4DBAFF'}
-                onMouseLeave={e => e.target.style.color = 'rgba(240,248,255,0.45)'}
+                onMouseLeave={e => e.target.style.color = 'rgba(240,248,255,0.6)'}
               >
                 {link.label}
               </a>

@@ -37,8 +37,8 @@ export default function EventDetail({ id }) {
       className="fixed inset-0 z-[70] overflow-y-auto bg-deep"
       initial={{ opacity: 0, y: 28 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 60 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      exit={{ opacity: 0, y: 32, scale: 0.97, filter: 'blur(6px)' }}
+      transition={{ duration: 0.4, ease: [0.4, 0, 1, 1] }}
     >
       {/* Close */}
       <button
